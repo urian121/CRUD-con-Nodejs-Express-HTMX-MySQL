@@ -42,6 +42,27 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Get task view (read-only)
+router.get('/:id/view', async (req, res) => {
+  try {
+    const conn = await getConnection();
+    const [rows] = await conn.execute('SELECT * FROM tasks WHERE id = ?', [req.params.id]);
+    
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+    
+    if (req.headers['hx-request']) {
+      return res.render('partials/task-view', { task: rows[0] });
+    }
+    
+    return res.json(rows[0]);
+  } catch (error) {
+    console.error('Error fetching task:', error);
+    return res.status(500).json({ error: 'Error fetching task' });
+  }
+});
+
 // Create a new task
 router.post('/', async (req, res) => {
   try {

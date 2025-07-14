@@ -83,6 +83,40 @@ function closeEditModal() {
   }
 }
 
+// Función para abrir el modal de vista de tarea
+function openViewModal() {
+  const viewModal = new bootstrap.Modal(document.getElementById('modal-view-task'));
+  viewModal.show();
+}
+
+// Función para configurar la modal de eliminación
+function setupDeleteModal(taskId, taskTitle) {
+  console.log('Configurando modal para eliminar tarea:', taskId, taskTitle);
+  
+  // Establecer el título de la tarea en la modal
+  const titleElement = document.getElementById('task-title-to-delete');
+  if (titleElement) {
+    titleElement.textContent = taskTitle;
+  }
+  
+  // Configurar el botón de confirmación
+  const confirmBtn = document.getElementById('confirm-delete-btn');
+  if (confirmBtn) {
+    confirmBtn.setAttribute('hx-delete', `/api/tasks/${taskId}`);
+    confirmBtn.setAttribute('hx-target', `#task-${taskId}`);
+    
+    // Reinicializar HTMX para el botón actualizado
+    if (window.htmx) {
+      window.htmx.process(confirmBtn);
+    }
+    
+    console.log('Botón configurado con:', {
+      'hx-delete': confirmBtn.getAttribute('hx-delete'),
+      'hx-target': confirmBtn.getAttribute('hx-target')
+    });
+  }
+}
+
 // Función para limpiar formulario
 function clearForm() {
   document.getElementById('title').value = '';

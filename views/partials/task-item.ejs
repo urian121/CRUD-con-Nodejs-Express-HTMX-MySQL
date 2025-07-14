@@ -61,9 +61,9 @@
       <!-- Botón Ver/Detalles -->
       <button type="button" 
               class="action-btn btn-view" 
-              onclick="openEditModal()"
-              hx-get="/api/tasks/<%= task.id %>"
-              hx-target="#edit-modal-content"
+              onclick="openViewModal()"
+              hx-get="/api/tasks/<%= task.id %>/view"
+              hx-target="#view-task-content"
               title="Ver detalles">
         <i class="bi bi-eye"></i>
       </button>
@@ -81,11 +81,9 @@
       <!-- Botón Eliminar -->
       <button type="button" 
               class="action-btn btn-delete"
-              hx-delete="/api/tasks/<%= task.id %>"
-              hx-target="#task-<%= task.id %>"
-              hx-swap="outerHTML"
-              hx-confirm="¿Estás seguro de que deseas eliminar esta tarea?"
-              hx-indicator="#task-list-indicator"
+              data-bs-toggle="modal" 
+              data-bs-target="#modal-delete"
+              onclick="setupDeleteModal('<%= task.id %>', '<%= task.title %>')"
               title="Eliminar tarea">
         <i class="bi bi-trash"></i>
       </button>

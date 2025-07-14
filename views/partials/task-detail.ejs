@@ -1,6 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title">
-    <i class="bi bi-pencil me-2"></i>
+  <h5 class="modal-title text-center w-100">
     Editar Tarea
   </h5>
   <button type="button" class="btn-close" onclick="closeEditModal()" aria-label="Close"></button>
@@ -31,12 +30,8 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
       <button type="submit" class="btn btn-node" onclick="setTimeout(closeEditModal, 300)">
-        <span id="edit-indicator" class="htmx-indicator">
-          <div class="spinner-border spinner-border-sm me-2" role="status">
-            <span class="visually-hidden">Cargando...</span>
-          </div>
-        </span>
         Guardar Cambios
+        <i class="bi bi-arrow-right"></i>
       </button>
     </div>
   </form>
