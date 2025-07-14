@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h5 class="modal-title">
+    <i class="bi bi-pencil me-2"></i>
+    Editar Tarea
+  </h5>
+  <button type="button" class="btn-close" onclick="closeEditModal()" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+  <form hx-put="/api/tasks/<%= task.id %>" 
+        hx-target="#task-<%= task.id %>" 
+        hx-swap="outerHTML"
+        hx-indicator="#edit-indicator">
+    <div class="mb-3">
+      <label for="edit-title" class="form-label">Título</label>
+      <input type="text" class="form-control" id="edit-title" name="title" value="<%= task.title %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="edit-description" class="form-label">Descripción</label>
+      <textarea class="form-control" id="edit-description" name="description" rows="4"><%= task.description %></textarea>
+    </div>
+    <div class="mb-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="completed" value="true" 
+               id="edit-completed" <%= task.completed ? 'checked' : '' %>>
+        <label class="form-check-label" for="edit-completed">
+          Marcar como completada
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
+      <button type="submit" class="btn btn-node" onclick="setTimeout(closeEditModal, 300)">
+        <span id="edit-indicator" class="htmx-indicator">
+          <div class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </span>
+        Guardar Cambios
+      </button>
+    </div>
+  </form>
+</div>

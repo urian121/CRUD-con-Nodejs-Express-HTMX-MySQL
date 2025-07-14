@@ -1,0 +1,94 @@
+<tr id="task-<%= task.id %>" class="<%= task.completed ? 'task-completed' : '' %>">
+  <!-- Estado -->
+  <td class="text-center" data-order="<%= task.completed ? 1 : 0 %>">
+    <span class="status-badge <%= task.completed ? 'status-completed' : 'status-pending' %>">
+      <% if (task.completed) { %>
+        <i class="bi bi-check-circle-fill"></i>
+        Completada
+      <% } else { %>
+        <i class="bi bi-clock"></i>
+        Pendiente
+      <% } %>
+    </span>
+  </td>
+  
+  <!-- Título -->
+  <td>
+    <div class="d-flex align-items-center">
+      <input type="checkbox" 
+             class="custom-checkbox me-3" 
+             id="complete-<%= task.id %>"
+             hx-patch="/api/tasks/<%= task.id %>/toggle"
+             hx-target="#task-<%= task.id %>"
+             hx-swap="outerHTML"
+             hx-indicator="#task-list-indicator"
+             <%= task.completed ? 'checked' : '' %>>
+      <div>
+        <h6 class="task-title">
+          <%= task.title %>
+        </h6>
+      </div>
+    </div>
+  </td>
+  
+  <!-- Descripción -->
+  <td>
+    <% if (task.description && task.description.trim() !== '') { %>
+      <span class="task-description" title="<%= task.description %>">
+        <%= task.description %>
+      </span>
+    <% } else { %>
+      <span class="task-description fst-italic">Sin descripción</span>
+    <% } %>
+  </td>
+  
+  <!-- Fecha -->
+  <td>
+    <span class="task-date" data-order="<%= new Date(task.created_at).getTime() %>">
+      <%= new Date(task.created_at).toLocaleDateString('es-ES', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }) %>
+    </span>
+  </td>
+  
+  <!-- Acciones -->
+  <td>
+    <div class="action-buttons">
+      <!-- Botón Ver/Detalles -->
+      <button type="button" 
+              class="action-btn btn-view" 
+              onclick="openEditModal()"
+              hx-get="/api/tasks/<%= task.id %>"
+              hx-target="#edit-modal-content"
+              title="Ver detalles">
+        <i class="bi bi-eye"></i>
+      </button>
+      
+      <!-- Botón Editar -->
+      <button type="button" 
+              class="action-btn btn-edit" 
+              onclick="openEditModal()"
+              hx-get="/api/tasks/<%= task.id %>"
+              hx-target="#edit-modal-content"
+              title="Editar tarea">
+        <i class="bi bi-pencil"></i>
+      </button>
+      
+      <!-- Botón Eliminar -->
+      <button type="button" 
+              class="action-btn btn-delete"
+              hx-delete="/api/tasks/<%= task.id %>"
+              hx-target="#task-<%= task.id %>"
+              hx-swap="outerHTML"
+              hx-confirm="¿Estás seguro de que deseas eliminar esta tarea?"
+              hx-indicator="#task-list-indicator"
+              title="Eliminar tarea">
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+  </td>
+</tr>
