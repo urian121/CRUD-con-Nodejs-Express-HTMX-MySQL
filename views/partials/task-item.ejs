@@ -60,7 +60,7 @@
     <div class="action-buttons">
       <!-- Botón Ver/Detalles -->
       <button type="button" 
-              class="action-btn btn-view" 
+              class="btn btn-outline-info btn-sm me-1" 
               onclick="openViewModal()"
               hx-get="/api/tasks/<%= task.id %>/view"
               hx-target="#view-task-content"
@@ -70,7 +70,7 @@
       
       <!-- Botón Editar -->
       <button type="button" 
-              class="action-btn btn-edit" 
+              class="btn btn-outline-warning btn-sm me-1" 
               onclick="openEditModal()"
               hx-get="/api/tasks/<%= task.id %>"
               hx-target="#edit-modal-content"
@@ -80,7 +80,7 @@
       
       <!-- Botón Eliminar -->
       <button type="button" 
-              class="action-btn btn-delete"
+              class="btn btn-outline-danger btn-sm"
               data-bs-toggle="modal" 
               data-bs-target="#modal-delete"
               onclick="setupDeleteModal('<%= task.id %>', '<%= task.title %>')"

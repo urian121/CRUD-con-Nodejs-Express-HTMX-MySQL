@@ -91,56 +91,6 @@ body {
   justify-content: center;
 }
 
-.action-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  border: 1px solid;
-  font-size: 0.875rem;
-}
-
-.action-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.action-btn.btn-view {
-  background-color: #e3f2fd;
-  color: #1976d2;
-  border-color: #bbdefb;
-}
-
-.action-btn.btn-view:hover {
-  background-color: #1976d2;
-  color: white;
-}
-
-.action-btn.btn-edit {
-  background-color: #fff3e0;
-  color: #f57c00;
-  border-color: #ffcc02;
-}
-
-.action-btn.btn-edit:hover {
-  background-color: #f57c00;
-  color: white;
-}
-
-.action-btn.btn-delete {
-  background-color: #ffebee;
-  color: #d32f2f;
-  border-color: #ffcdd2;
-}
-
-.action-btn.btn-delete:hover {
-  background-color: #d32f2f;
-  color: white;
-}
-
 /* Checkbox personalizado */
 .custom-checkbox {
   width: 20px;
@@ -178,14 +128,12 @@ body {
   margin-bottom: 0;
 }
 
-/* Fecha estilizada */
 .task-date {
   color: #6c757d;
   font-size: 0.8rem;
   font-weight: 500;
 }
 
-/* Iconos de estado */
 .status-icon {
   width: 20px;
   height: 20px;
@@ -204,30 +152,6 @@ body {
 .status-completed {
   background-color: #28a745;
   color: white;
-}
-
-
-.htmx-indicator {
-  opacity: 0;
-  transition: opacity 200ms ease-in;
-}
-
-.htmx-request .htmx-indicator {
-  opacity: 1;
-}
-
-.htmx-request.htmx-indicator {
-  opacity: 1;
-}
-
-/* Animaciones */
-.fade-in {
-  animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Estado vacío */
@@ -255,4 +179,8 @@ body {
 .active>.page-link, .page-link.active {
     background-color: var(--node-green);
     border-color: var(--node-green);
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.3) !important;
 }

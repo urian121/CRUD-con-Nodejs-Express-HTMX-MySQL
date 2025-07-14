@@ -19,9 +19,9 @@
       <textarea class="form-control" id="edit-description" name="description" rows="4"><%= task.description %></textarea>
     </div>
     <div class="mb-3">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="completed" value="true" 
-               id="edit-completed" <%= task.completed ? 'checked' : '' %>>
+      <div class="d-flex align-items-center">
+        <input type="checkbox" class="custom-checkbox me-3" name="completed" value="true" id="edit-completed"
+          <%=task.completed ? 'checked' : '' %>>
         <label class="form-check-label" for="edit-completed">
           Marcar como completada
         </label>

@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { getConnection } = require('../config/database');
 
-// Database connection is now imported from config/database.js
 
-// Get all tasks
+
 router.get('/', async (req, res) => {
   try {
     const conn = await getConnection();
