@@ -1,5 +1,4 @@
 <tr id="task-<%= task.id %>" class="<%= task.completed ? 'task-completed' : '' %>">
-  <!-- Estado -->
   <td class="text-center" data-order="<%= task.completed ? 1 : 0 %>">
     <span class="status-badge <%= task.completed ? 'status-completed' : 'status-pending' %>">
       <% if (task.completed) { %>
@@ -12,7 +11,6 @@
     </span>
   </td>
   
-  <!-- Título -->
   <td>
     <div class="d-flex align-items-center">
       <input type="checkbox" 
@@ -31,7 +29,6 @@
     </div>
   </td>
   
-  <!-- Descripción -->
   <td>
     <% if (task.description && task.description.trim() !== '') { %>
       <span class="task-description" title="<%= task.description %>">

@@ -184,3 +184,19 @@ body {
 .modal-backdrop {
   background-color: rgba(0, 0, 0, 0.3) !important;
 }
+
+.table-responsive {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.table-responsive .table {
+    margin-bottom: 0;
+}
+
+.table-responsive thead th {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+}
