@@ -22,8 +22,8 @@
              hx-indicator="#task-list-indicator"
              <%= task.completed ? 'checked' : '' %>>
       <div>
-        <h6 class="task-title">
-          <%= task.title %>
+        <h6 title="<%= task.title %>">
+          <%= task.title.length > 50 ? task.title.substring(0, 50) + '...' : task.title %>
         </h6>
       </div>
     </div>
@@ -32,7 +32,7 @@
   <td>
     <% if (task.description && task.description.trim() !== '') { %>
       <span class="task-description" title="<%= task.description %>">
-        <%= task.description %>
+        <%= task.description.length > 50 ? task.description.substring(0, 50) + '...' : task.description %>
       </span>
     <% } else { %>
       <span class="task-description fst-italic">Sin descripción</span>

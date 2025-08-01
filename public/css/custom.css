@@ -122,12 +122,6 @@ body {
   white-space: nowrap;
 }
 
-.task-title {
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 0;
-}
-
 .task-date {
   color: #6c757d;
   font-size: 0.8rem;
