@@ -1,34 +1,26 @@
 <tr id="task-<%= task.id %>" class="<%= task.completed ? 'task-completed' : '' %>">
-  <td class="text-center" data-order="<%= task.completed ? 1 : 0 %>">
-    <span class="status-badge <%= task.completed ? 'status-completed' : 'status-pending' %>">
-      <% if (task.completed) { %>
-        <i class="bi bi-check-circle-fill"></i>
-        Completada
-      <% } else { %>
-        <i class="bi bi-clock"></i>
-        Pendiente
-      <% } %>
-    </span>
-  </td>
-  
-  <td>
-    <div class="d-flex align-items-center">
-      <input type="checkbox" 
-             class="custom-checkbox me-3" 
-             id="complete-<%= task.id %>"
-             hx-patch="/api/tasks/<%= task.id %>/toggle"
-             hx-target="#task-<%= task.id %>"
-             hx-swap="outerHTML"
-             hx-indicator="#task-list-indicator"
-             <%= task.completed ? 'checked' : '' %>>
-      <div>
-        <h6 title="<%= task.title %>">
-          <%= task.title.length > 50 ? task.title.substring(0, 50) + '...' : task.title %>
-        </h6>
+  <td class="text-center">
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="form-check form-switch">
+        <input class="form-check-input" 
+          type="checkbox" 
+          id="complete-<%= task.id %>"
+          hx-patch="/api/tasks/<%= task.id %>/toggle" hx-vals="js:{
+            id: '<%= task.id %>',
+            completed: event.target.checked ? '1' : '0'
+            }" 
+            hx-target="#task-<%= task.id %>"
+            hx-trigger="change" hx-swap="outerHTML"
+            <%= task.completed ? 'checked' : '' %>>
+        <label class="form-check-label" for="complete-<%= task.id %>">
+          <%= task.completed ? 'Completada' : 'Pendiente' %>
+        </label>
       </div>
     </div>
   </td>
-  
+  <td>
+    <%= task.title.length> 50 ? task.title.substring(0, 50) + '...' : task.title %>
+  </td>
   <td>
     <% if (task.description && task.description.trim() !== '') { %>
       <span class="task-description" title="<%= task.description %>">
@@ -38,16 +30,12 @@
       <span class="task-description fst-italic">Sin descripción</span>
     <% } %>
   </td>
-  
-  <!-- Fecha -->
   <td>
     <span class="task-date" data-order="<%= new Date(task.created_at).getTime() %>">
       <%= new Date(task.created_at).toLocaleDateString('es-ES', { 
         year: 'numeric', 
-        month: 'short', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
+        month: '2-digit', 
+        day: '2-digit'
       }) %>
     </span>
   </td>
@@ -58,7 +46,8 @@
       <!-- Botón Ver/Detalles -->
       <button type="button" 
               class="btn btn-outline-info btn-sm me-1" 
-              onclick="openViewModal()"
+              data-bs-toggle="modal" 
+              data-bs-target="#modal-view-task"
               hx-get="/api/tasks/<%= task.id %>/view"
               hx-target="#view-task-content"
               title="Ver detalles">
@@ -68,7 +57,8 @@
       <!-- Botón Editar -->
       <button type="button" 
               class="btn btn-outline-warning btn-sm me-1" 
-              onclick="openEditModal()"
+              data-bs-toggle="modal" 
+              data-bs-target="#editTaskModal"
               hx-get="/api/tasks/<%= task.id %>"
               hx-target="#edit-modal-content"
               title="Editar tarea">

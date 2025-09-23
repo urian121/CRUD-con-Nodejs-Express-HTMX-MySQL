@@ -28,7 +28,6 @@
                         hx-swap="outerHTML"
                         hx-indicator="#spinnerModal"
                         hx-on::before-request="
-                            console.log('Antes de la petición de eliminación');
                             document.getElementById('spinnerModal').classList.remove('d-none');
                             document.getElementById('confirmDelete').classList.add('d-none');
                             document.querySelector('.modal-footer').classList.add('d-none');
@@ -46,10 +45,6 @@
                                 const modal = bootstrap.Modal.getInstance(modalEl);
                                 if (modal) {
                                     modal.hide();
-                                }
-                                // Refrescar la tabla si existe
-                                if (typeof refreshDataTable === 'function') {
-                                    refreshDataTable();
                                 }
                             } else {
                                 console.log('Error en la eliminación:', event.detail);

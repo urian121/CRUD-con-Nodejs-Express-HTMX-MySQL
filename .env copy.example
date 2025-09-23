@@ -1,5 +1,5 @@
-PORT=3000
 DB_HOST=localhost
+PORT=3000
 DB_USER=root
-DB_PASSWORD=
+DB_PASSWORD=4825
 DB_NAME=crud_app_nodejs_htmx

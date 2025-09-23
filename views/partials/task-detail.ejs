@@ -2,14 +2,34 @@
   <h3 class="modal-title text-center w-100">
     Editar Tarea
   </h3>
-  <button type="button" class="btn-close" onclick="closeEditModal()" aria-label="Close"></button>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 
 <div class="modal-body">
-  <form hx-put="/api/tasks/<%= task.id %>" 
+  <!-- Spinner para el modal de edición -->
+  <div id="editSpinnerModal" class="d-flex flex-column align-items-center my-3 d-none">
+    <div class="spinner-border text-primary mb-2" role="status"></div>
+    <span>Actualizando...</span>
+  </div>
+
+  <form id="editTaskForm" hx-put="/api/tasks/<%= task.id %>" 
         hx-target="#task-<%= task.id %>" 
         hx-swap="outerHTML"
-        hx-indicator="#edit-indicator">
+        hx-indicator="#edit-indicator"
+        hx-on::before-request="
+          document.getElementById('editSpinnerModal').classList.remove('d-none');
+          document.getElementById('editTaskForm').classList.add('d-none');
+        "
+        hx-on::after-request="
+          if(event.detail.xhr.status === 200) {
+            setTimeout(() => {
+              const modal = bootstrap.Modal.getInstance(document.querySelector('#editTaskModal'));
+              if(modal) modal.hide();
+              document.getElementById('editSpinnerModal').classList.add('d-none');
+              document.getElementById('editTaskForm').classList.remove('d-none');
+            }, 800);
+          }
+        ">
     <div class="mb-3">
       <label for="edit-title" class="form-label">Título</label>
       <input type="text" class="form-control" id="edit-title" name="title" value="<%= task.title %>" required>
@@ -28,8 +48,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
-      <button type="submit" class="btn btn-node" onclick="setTimeout(closeEditModal, 300)">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-node">
         Guardar Cambios
         <i class="bi bi-arrow-right"></i>
       </button>

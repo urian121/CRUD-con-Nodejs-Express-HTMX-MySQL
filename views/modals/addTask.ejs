@@ -8,7 +8,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form hx-post="/api/tasks" hx-target="#task-list" hx-swap="innerHTML" hx-indicator="#form-indicator">
+                <!-- Spinner fuera del <form> para que no se borre -->
+                <div id="spinnerModal" class="d-flex flex-column align-items-center my-3 d-none">
+                    <div class="spinner-border text-primary mb-2" role="status"></div>
+                    <span>Cargando...</span>
+                </div>
+                
+                <form autocomplete="off" id="addTaskForm"
+                        hx-post="/api/tasks" 
+                        hx-target="#tasksTable tbody" 
+                        hx-swap="afterbegin" 
+                        hx-on::before-request="
+                        document.getElementById('spinnerModal').classList.remove('d-none');
+                        document.getElementById('addTaskForm').classList.add('d-none');
+                        " 
+                        hx-on::after-request="
+                        setTimeout(() => {
+                            const modal = bootstrap.Modal.getInstance(document.querySelector('#addTaskModal'));
+                            if(modal) modal.hide();
+                            document.getElementById('spinnerModal').classList.add('d-none');
+                            document.getElementById('addTaskForm').classList.remove('d-none');
+                            document.getElementById('addTaskForm').reset();
+                        }, 800);
+                        ">
                     <div class="mb-3">
                         <label for="title" class="form-label">Título</label>
                         <input type="text" class="form-control" id="title" name="title" required>
