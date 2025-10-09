@@ -4,7 +4,7 @@ require('dotenv').config();
 const { getConnection } = require('./config/database');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // Middleware
 app.use(express.json());

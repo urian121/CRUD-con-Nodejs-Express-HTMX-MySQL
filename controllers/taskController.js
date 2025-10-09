@@ -1,7 +1,15 @@
 const { getConnection } = require('../config/database');
 
+
+/**
+ * Se define la clase TaskController que agrupa funciones relacionadas con las tareas.
+ */
 class TaskController {
-  // Get all tasks
+  
+  /**
+   * Se define el método getAllTasks que obtiene todas las tareas de la base de datos.
+   * Y se utiliza static para poder llamar el método sin crear una instancia de la clase, ejemplo: TaskController.getAllTasks(req, res)
+   */
   static async getAllTasks(req, res) {
     try {
       const conn = await getConnection();
@@ -18,7 +26,7 @@ class TaskController {
     }
   }
 
-  // Get a single task
+  // Obtener una tarea por ID
   static async getTaskById(req, res) {
     try {
       const conn = await getConnection();
@@ -39,7 +47,7 @@ class TaskController {
     }
   }
 
-  // Get task view (read-only)
+  // Obtener la vista de una tarea por ID (solo lectura)
   static async getTaskView(req, res) {
     try {
       const conn = await getConnection();
@@ -60,7 +68,7 @@ class TaskController {
     }
   }
 
-  // Create a new task
+  // Crear una nueva tarea
   static async createTask(req, res) {
     try {
       const { title, description } = req.body;
@@ -88,7 +96,7 @@ class TaskController {
     }
   }
 
-  // Update a task
+  // Actualizar una tarea por ID
   static async updateTask(req, res) {
     try {
       const { title, description, completed } = req.body;
@@ -121,7 +129,7 @@ class TaskController {
     }
   }
 
-  // Delete a task
+  // Eliminar una tarea por ID
   static async deleteTask(req, res) {
     try {
       const taskId = req.params.id;
@@ -146,7 +154,7 @@ class TaskController {
     }
   }
 
-  // Toggle task completion status
+  // Actualizar el estado de completitud de una tarea por ID
   static async toggleTask(req, res) {
     try {
       const taskId = req.params.id;

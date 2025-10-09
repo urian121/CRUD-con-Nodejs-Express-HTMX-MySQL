@@ -1,7 +1,7 @@
 {
   "name": "crud-nodejs-express-htmx-mysql",
   "version": "1.0.0",
-  "description": "CRUD application using Node.js, Express, HTMX and MySQL",
+  "description": "Aplicación para gestionar tareas con recarga dinámica gracias a HTMX, backend en Express y base de datos MySQL. Incluye diseño moderno y responsivo con Bootstrap.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -14,7 +14,7 @@
     "mysql",
     "crud"
   ],
-  "author": "",
+  "author": "Urian Viera",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",

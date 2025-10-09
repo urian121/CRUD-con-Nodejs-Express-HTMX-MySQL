@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const TaskController = require('../controllers/taskController');
 
-// Routes definitions
+// Rutas para las tareas
 router.get('/', TaskController.getAllTasks);
 router.get('/:id', TaskController.getTaskById);
 router.get('/:id/view', TaskController.getTaskView);
