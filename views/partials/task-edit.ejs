@@ -21,7 +21,7 @@
           document.getElementById('editTaskForm').classList.add('d-none');
         "
         hx-on::after-request="
-          if(event.detail.xhr.status === 200) {
+          if (event.detail.successful) {
             setTimeout(() => {
               const modal = bootstrap.Modal.getInstance(document.querySelector('#editTaskModal'));
               if(modal) modal.hide();

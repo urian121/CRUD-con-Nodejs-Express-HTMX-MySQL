@@ -19,16 +19,16 @@
                         hx-target="#tasksTable tbody" 
                         hx-swap="afterbegin" 
                         hx-on::before-request="
-                        document.getElementById('spinnerModal').classList.remove('d-none');
-                        document.getElementById('addTaskForm').classList.add('d-none');
+                        document.querySelector('#spinnerModal').classList.remove('d-none');
+                        document.querySelector('#addTaskForm').classList.add('d-none');
                         " 
                         hx-on::after-request="
                         setTimeout(() => {
                             const modal = bootstrap.Modal.getInstance(document.querySelector('#addTaskModal'));
                             if(modal) modal.hide();
-                            document.getElementById('spinnerModal').classList.add('d-none');
-                            document.getElementById('addTaskForm').classList.remove('d-none');
-                            document.getElementById('addTaskForm').reset();
+                            document.querySelector('#spinnerModal').classList.add('d-none');
+                            document.querySelector('#addTaskForm').classList.remove('d-none');
+                            document.querySelector('#addTaskForm').reset();
                         }, 800);
                         ">
                     <div class="mb-3">

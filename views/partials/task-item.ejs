@@ -11,6 +11,7 @@
             }" 
             hx-target="#task-<%= task.id %>"
             hx-trigger="change" hx-swap="outerHTML"
+            hx-on::before-request="console.log('Cambiando estado de tarea:', '<%= task.id %>')"
             <%= task.completed ? 'checked' : '' %>>
         <label class="form-check-label" for="complete-<%= task.id %>">
           <%= task.completed ? 'Completada' : 'Pendiente' %>
@@ -69,7 +70,7 @@
       <button type="button" 
               class="btn btn-outline-danger btn-sm"
               data-bs-toggle="modal" 
-              data-bs-target="#modal-delete"
+              data-bs-target="#deleteToastModal"
               onclick="setupDeleteModal('<%= task.id %>', '<%= task.title %>')"
               title="Eliminar tarea">
         <i class="bi bi-trash"></i>

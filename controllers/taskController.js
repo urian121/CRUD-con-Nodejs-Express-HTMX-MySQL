@@ -1,6 +1,5 @@
 const { getConnection } = require('../config/database');
 
-
 /**
  * Se define la clase TaskController que agrupa funciones relacionadas con las tareas.
  */
@@ -37,7 +36,7 @@ class TaskController {
       }
       
       if (req.headers['hx-request']) {
-        return res.render('partials/task-detail', { task: rows[0] });
+        return res.render('partials/task-edit', { task: rows[0] });
       }
       
       return res.json(rows[0]);

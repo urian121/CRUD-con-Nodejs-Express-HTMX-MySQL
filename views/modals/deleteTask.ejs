@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-delete" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade" id="deleteToastModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
             <div class="modal-header">
@@ -10,7 +10,7 @@
 
             <div class="modal-body">
                 <!-- Spinner fuera del <form> para que no se borre -->
-                <div id="spinnerModal" class="d-flex flex-column align-items-center justify-content-center my-3 d-none">
+                <div id="spinnerModalDelete" class="d-flex flex-column align-items-center justify-content-center my-3 d-none">
                     <div class="spinner-border mb-2" role="status"></div>
                     <span class="fs-5">Eliminando...</span>
                 </div>
@@ -26,29 +26,26 @@
                         hx-delete=""
                         hx-target=""
                         hx-swap="outerHTML"
-                        hx-indicator="#spinnerModal"
+                        hx-indicator="#spinnerModalDelete"
                         hx-on::before-request="
-                            document.getElementById('spinnerModal').classList.remove('d-none');
-                            document.getElementById('confirmDelete').classList.add('d-none');
+                            document.querySelector('#spinnerModalDelete').classList.remove('d-none');
+                            document.querySelector('#confirmDelete').classList.add('d-none');
                             document.querySelector('.modal-footer').classList.add('d-none');
                         " 
                         hx-on::after-request="
-                            console.log('Después de la petición de eliminación');
-                            document.getElementById('spinnerModal').classList.add('d-none');
-                            document.getElementById('confirmDelete').classList.remove('d-none');
+                        setTimeout(() => {
+                            document.querySelector('#spinnerModalDelete').classList.add('d-none');
+                            document.querySelector('#confirmDelete').classList.remove('d-none');
                             document.querySelector('.modal-footer').classList.remove('d-none');
 
                             if (event.detail.successful) {
-                                console.log('Eliminación exitosa');
-                                // Cerrar la modal
-                                const modalEl = document.getElementById('modal-delete');
+                                const modalEl = document.querySelector('#deleteToastModal');
                                 const modal = bootstrap.Modal.getInstance(modalEl);
-                                if (modal) {
-                                    modal.hide();
-                                }
+                                if(modal) modal.hide();
                             } else {
                                 console.log('Error en la eliminación:', event.detail);
                             }
+                        }, 800);
                         ">
                     Eliminar <i class="bi bi-trash3"></i>
                 </button>
