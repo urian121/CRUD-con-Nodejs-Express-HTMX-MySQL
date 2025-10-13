@@ -1,8 +1,9 @@
-const mysql = require('mysql2/promise');
-require('dotenv').config();
+const mysql = require('mysql2/promise'); // Importar MySQL2 con soporte para promesas
+require('dotenv').config(); // Cargar variables de entorno desde el archivo .env
 
-let connection;
+let connection; // Variable para almacenar la conexión a la base de datos
 
+// Función para obtener la conexión a la base de datos
 async function getConnection() {
   if (!connection) {
     try {
@@ -21,6 +22,7 @@ async function getConnection() {
   return connection;
 }
 
+// Exportar la función getConnection para ser utilizada en otras partes de la aplicación
 module.exports = {
   getConnection
 };

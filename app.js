@@ -1,25 +1,25 @@
-const express = require('express');
-const path = require('path');
-require('dotenv').config();
-const { getConnection } = require('./config/database');
+const express = require('express'); // Importar Express
+const path = require('path'); // Importar Path
+require('dotenv').config(); // Cargar variables de entorno
+const { getConnection } = require('./config/database'); // Importar la conexión a la base de datos
 
-const app = express();
-const PORT = process.env.PORT || 3002;
+const app = express(); // Inicializar Express
+const PORT = process.env.PORT || 3002; // Definir el puerto
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); // Servir archivos estáticos
 
 // Motor de plantillas
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs'); // Configurar el motor de plantillas
+app.set('views', path.join(__dirname, 'views')); // Configurar la carpeta de vistas
 
 
-// Rutas
+// Ruta principal - renderizar la página principal con las tareas
 app.get('/', async (req, res) => {
   try {
-    const connection = await getConnection();
+    const connection = await getConnection(); // Obtener la conexión a la base de datos
     const [rows] = await connection.execute('SELECT * FROM tasks ORDER BY created_at DESC');
     res.render('index', { tasks: rows });
   } catch (error) {
