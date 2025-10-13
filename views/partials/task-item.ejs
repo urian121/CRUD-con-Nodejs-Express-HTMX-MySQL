@@ -13,7 +13,7 @@
             hx-trigger="change" hx-swap="outerHTML"
             hx-on::before-request="console.log('Cambiando estado de tarea:', '<%= task.id %>')"
             <%= task.completed ? 'checked' : '' %>>
-        <label class="form-check-label" for="complete-<%= task.id %>">
+        <label class="form-check-label badge <%= task.completed ? 'bg-success' : 'bg-danger' %> text-white" for="complete-<%= task.id %>">
           <%= task.completed ? 'Completada' : 'Pendiente' %>
         </label>
       </div>
